@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "860183689296",
+    "project_id": "messenger-761f0",
+    "storage_bucket": "messenger-761f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860183689296:android:5426c4ed4ee94069d73955",
+        "android_client_info": {
+          "package_name": "ru.blackmirrror.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860183689296-8j791mfc2bkrlohuk5r7h6gjpr1fa5v0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.blackmirrror.messenger",
+            "certificate_hash": "7307cbc7641cd5f17bb490f307c8e462a9269f80"
+          }
+        },
+        {
+          "client_id": "860183689296-7m85v3pdcqqf2c9jr1ml7v9pmmckkup4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJwFNpyTPO0UBTdvLudPjz29_r5gwS2Nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860183689296-7m85v3pdcqqf2c9jr1ml7v9pmmckkup4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Messenger</string>
+
+    <string name="login_header">Login to Your account</string>
+    <string name="login_btn">Generate code</string>
+    <string name="login_hint">Please enter your Phone number for verification</string>
+    <string name="login_phone_hint">Your phone number</string>
+
+    <string name="verification_header">Enter Code</string>
+    <string name="verification_hint">We have sent you an Code for verification</string>
+    <string name="verification_code_hint">Your code</string>
+    <string name="verification_btn">Verify</string>
+
+    <string name="logout_btn">Logout</string>
+    <string name="hint_enter_number">Please enter Your phone number</string>
+    <string name="hint_try_again">Please try again</string>
+</resources>
