@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_chats">
+
+    <fragment
+        android:id="@+id/navigation_chats"
+        android:name="ru.blackmirrror.messenger.ui.chats.ChatsFragment"
+        android:label="@string/title_chats"
+        tools:layout="@layout/fragment_chats" />
+
+    <fragment
+        android:id="@+id/navigation_calls"
+        android:name="ru.blackmirrror.messenger.ui.calls.CallsFragment"
+        android:label="@string/title_calls"
+        tools:layout="@layout/fragment_calls" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="ru.blackmirrror.messenger.ui.account.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_account" />
+</navigation>

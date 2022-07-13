@@ -136,7 +136,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void sendUserHome() {
-        Intent intent = new Intent(AuthActivity.this, TempActivity.class);
+        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
