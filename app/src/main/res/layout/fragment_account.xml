@@ -6,6 +6,105 @@
     android:layout_height="match_parent"
     tools:context=".ui.account.AccountFragment">
 
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/btn_enter"
+                android:text="@string/logout_btn"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="667dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etStatus"/>
+
+            <EditText
+                android:id="@+id/etStatus"
+                style="@style/EditTextFieldProfile"
+                android:ems="10"
+                android:hint="@string/status"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etLastName"/>
+
+            <EditText
+                android:id="@+id/etLastName"
+                style="@style/EditTextFieldProfile"
+                android:ems="10"
+                android:hint="@string/last_name"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etFirstName"/>
+
+            <EditText
+                android:id="@+id/etFirstName"
+                style="@style/EditTextFieldProfile"
+                android:ems="10"
+                android:hint="@string/first_name"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLink"/>
+
+            <TextView
+                android:id="@+id/tvLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="linklink"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber"/>
+
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imvPhoto"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imvPhoto"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:civ_border_color="#FFFFFFFF"
+                app:civ_border_width="2dp"
+                android:src="@drawable/img_logo"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
     <TextView
         android:id="@+id/text_account"
         android:layout_width="match_parent"
@@ -17,6 +116,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

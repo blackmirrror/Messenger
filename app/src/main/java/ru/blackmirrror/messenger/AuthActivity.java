@@ -14,10 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
@@ -76,14 +73,6 @@ public class AuthActivity extends AppCompatActivity {
             @Override
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
-
-                new android.os.Handler().postDelayed(
-                        () -> {
-                            Intent intent = new Intent(AuthActivity.this, VerificationActivity.class);
-                            intent.putExtra(TAG_PUT_EXTRA, s);
-                            startActivity(intent);
-                        },
-                        10000);
 
                 Intent intent = new Intent(AuthActivity.this, VerificationActivity.class);
                 intent.putExtra(TAG_PUT_EXTRA, s);
