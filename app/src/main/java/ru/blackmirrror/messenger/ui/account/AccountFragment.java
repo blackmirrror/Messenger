@@ -1,8 +1,10 @@
 package ru.blackmirrror.messenger.ui.account;
 
+import static android.app.Activity.RESULT_OK;
 import static ru.blackmirrror.messenger.utils.FirebaseHelperUser.*;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -19,11 +21,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import ru.blackmirrror.messenger.AuthActivity;
 import ru.blackmirrror.messenger.R;
@@ -84,7 +93,14 @@ public class AccountFragment extends Fragment {
         tvPhoneNumber = root.findViewById(R.id.tvPhoneNumber);
         tvLink = root.findViewById(R.id.tvLink);
         imvPhoto = root.findViewById(R.id.imvPhoto);
+
         imvEditPhoto = root.findViewById(R.id.imvEditPhoto);
+        imvEditPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPhoto();
+            }
+        });
 
         tvEditProfile = root.findViewById(R.id.tvEditProfile);
         tvEditProfile.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +118,32 @@ public class AccountFragment extends Fragment {
         });
     }
 
+    private void setPhoto() {
+        CropImage.activity()
+                .setAspectRatio(1,1)
+                .setRequestedSize(600,600)
+                .setCropShape(CropImageView.CropShape.OVAL)
+                .start(getActivity());
+    }
+
+    /*@Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK &&
+        data != null) {
+            Uri uri = CropImage.getActivityResult(data).getUri();
+            StorageReference path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE).child(UID);
+            path.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        //toast is successful
+                    }
+                }
+            });
+        }
+    }*/
+
     private void initDb() {
         REF_DATABASE_ROOT.child(NODE_USERS).child(UID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -113,6 +155,12 @@ public class AccountFragment extends Fragment {
                 etStatus.setText(user.getStatus());
                 tvLink.setText(user.getLink());
                 tvPhoneNumber.setText(user.getPhoneNumber());
+                if (user.getPhotoUrl() != null) {
+                    Picasso.get()
+                            .load(user.getPhotoUrl())
+                            .placeholder(R.drawable.img_logo)
+                            .into(imvPhoto);
+                }
 
                 User = user;
             }
