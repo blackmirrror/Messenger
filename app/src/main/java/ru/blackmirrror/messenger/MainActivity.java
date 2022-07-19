@@ -8,15 +8,12 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -65,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
     }
 
@@ -83,33 +78,22 @@ public class MainActivity extends AppCompatActivity {
                 data != null) {
             Uri uri = CropImage.getActivityResult(data).getUri();
             StorageReference path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE).child(UID);
-            path.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        path.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task2) {
-                                if (task2.isSuccessful()) {
-                                    String photoUrl = task2.getResult().toString();
-                                    REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_PHOTO_URL)
-                                            .setValue(photoUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task3) {
-                                            if (task3.isSuccessful()) {
-                                                //ImageView imvPhoto = findViewById(R.id.imvPhoto);
-                                                Picasso.get()
-                                                        .load(photoUrl)
-                                                        .placeholder(R.drawable.img_logo)
-                                                        .into((ImageView) findViewById(R.id.imvPhoto));
-                                                //USER.setPhotoUrl(photoUrl);
-                                            }
+            path.putFile(uri).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    path.getDownloadUrl().addOnCompleteListener(task2 -> {
+                        if (task2.isSuccessful()) {
+                            String photoUrl = task2.getResult().toString();
+                            REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_PHOTO_URL)
+                                    .setValue(photoUrl).addOnCompleteListener(task3 -> {
+                                        if (task3.isSuccessful()) {
+                                            Picasso.get()
+                                                    .load(photoUrl)
+                                                    .placeholder(R.drawable.img_logo)
+                                                    .into((ImageView) findViewById(R.id.imvPhoto));
                                         }
                                     });
-                                }
-                            }
-                        });
-                    }
+                        }
+                    });
                 }
             });
         }
