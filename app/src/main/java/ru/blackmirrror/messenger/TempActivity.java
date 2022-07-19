@@ -27,11 +27,11 @@ public class TempActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
 
-        btnLogout = findViewById(R.id.btnLogout);
+        /*btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(v -> {
             auth.signOut();
             sendUserToLogin();
-        });
+        });*/
     }
 
     @Override

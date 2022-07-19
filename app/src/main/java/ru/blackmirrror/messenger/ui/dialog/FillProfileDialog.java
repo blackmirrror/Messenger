@@ -15,9 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import ru.blackmirrror.messenger.R;
 import ru.blackmirrror.messenger.models.User;
+import ru.blackmirrror.messenger.ui.account.AccountFragment;
 
 public class FillProfileDialog extends DialogFragment {
 
@@ -39,7 +43,8 @@ public class FillProfileDialog extends DialogFragment {
         builder.setView(profileWindow);
         builder.setTitle(R.string.fill_profile)
                 .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                         setUpUi();
                         setUserData();
                     }
@@ -62,12 +67,18 @@ public class FillProfileDialog extends DialogFragment {
     }
 
     private void setUserData() {
+        //getUserData();
         initFirebase();
         User user = new User();
         user.setFirstName(firstName.getText().toString());
         user.setLastName(lastName.getText().toString());
         user.setLink(link.getText().toString());
-        user.setStatus(status.getText().toString());
+        if (isRight(status.getText().toString()))
+            user.setStatus(status.getText().toString());
+        else {
+            hint.setText("such a link already exists");
+            setUserData();
+        }
         user.setPhoneNumber(CURRENT_USER.getPhoneNumber());
         REF_DATABASE_ROOT.child(NODE_USERS).child(UID).setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -75,5 +86,24 @@ public class FillProfileDialog extends DialogFragment {
                     public void onSuccess(Void unused) {
                     }
                 });
+        /*REF_DATABASE_ROOT.child(NODE_USERNAMES).child(link.getText().toString()).setValue(UID)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                    }
+                });*/
+    }
+
+    private boolean isRight(String linka) {
+        return true;
+    }
+
+    private void getUserData() {
+        if (AccountFragment.User != null) {
+            firstName.setText(AccountFragment.User.getFirstName());
+            lastName.setText(AccountFragment.User.getLastName());
+            link.setText(AccountFragment.User.getLink());
+            status.setText(AccountFragment.User.getStatus());
+        }
     }
 }

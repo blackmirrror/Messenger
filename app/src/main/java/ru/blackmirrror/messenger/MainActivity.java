@@ -3,6 +3,7 @@ package ru.blackmirrror.messenger;
 import static ru.blackmirrror.messenger.utils.FirebaseHelperUser.*;
 
 import android.os.Bundle;
+import android.view.Window;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

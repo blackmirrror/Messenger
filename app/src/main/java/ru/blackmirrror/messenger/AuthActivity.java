@@ -97,6 +97,7 @@ public class AuthActivity extends AppCompatActivity {
             else {
                 pbGenerateCode.setVisibility(View.VISIBLE);
                 btnEnter.setEnabled(false);
+                etPhoneNumber.setEnabled(false);
 
                 PhoneAuthOptions options =
                         PhoneAuthOptions.newBuilder(auth)

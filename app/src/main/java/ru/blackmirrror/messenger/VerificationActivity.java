@@ -65,6 +65,7 @@ public class VerificationActivity extends AppCompatActivity {
             else {
                 pbVerify.setVisibility(View.VISIBLE);
                 btnVerify.setEnabled(false);
+                etVerify.setEnabled(false);
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(authData, codeVerify);
                 signInWithPhoneAuthCredential(credential);
             }

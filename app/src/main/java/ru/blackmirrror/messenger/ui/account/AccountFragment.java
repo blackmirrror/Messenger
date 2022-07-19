@@ -4,6 +4,7 @@ import static ru.blackmirrror.messenger.utils.FirebaseHelperUser.*;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import ru.blackmirrror.messenger.AuthActivity;
 import ru.blackmirrror.messenger.R;
 import ru.blackmirrror.messenger.databinding.FragmentAccountBinding;
 import ru.blackmirrror.messenger.models.User;
+import ru.blackmirrror.messenger.ui.dialog.FillProfileDialog;
 
 public class AccountFragment extends Fragment {
 
@@ -40,13 +42,15 @@ public class AccountFragment extends Fragment {
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
 
-    private Button btnLogout;
-    private EditText etFirstName;
-    private EditText etLastName;
-    private EditText etStatus;
+    private TextView btnLogout;
+    private TextView etFirstName;
+    private TextView etLastName;
+    private TextView etStatus;
     private TextView tvPhoneNumber;
     private TextView tvLink;
     private ImageView imvPhoto;
+    private TextView tvEditProfile;
+    private ImageView imvEditPhoto;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -80,8 +84,18 @@ public class AccountFragment extends Fragment {
         tvPhoneNumber = root.findViewById(R.id.tvPhoneNumber);
         tvLink = root.findViewById(R.id.tvLink);
         imvPhoto = root.findViewById(R.id.imvPhoto);
+        imvEditPhoto = root.findViewById(R.id.imvEditPhoto);
 
-        btnLogout = root.findViewById(R.id.btnLogout);
+        tvEditProfile = root.findViewById(R.id.tvEditProfile);
+        tvEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FillProfileDialog fillProfileDialog = new FillProfileDialog();
+                fillProfileDialog.show(getActivity().getSupportFragmentManager(), "ProfileDialogFragment");
+            }
+        });
+
+        btnLogout = root.findViewById(R.id.tvLogout);
         btnLogout.setOnClickListener(v -> {
             auth.signOut();
             sendUserToLogin();
